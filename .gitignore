@@ -22,12 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# 根目录隐私素材（勿提交公开仓库）
-/个人简历.pdf
-/白底证件照PNG.png
-
-# Python 缓存
-__pycache__/
-*.pyc
-

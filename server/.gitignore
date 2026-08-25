@@ -1,6 +1,4 @@
 # 服务器运行时生成的数据（勿提交）
-uploads/
-about-uploads/
-data.json
-about-*.json
+server/uploads/
+server/data.json
 node_modules/
