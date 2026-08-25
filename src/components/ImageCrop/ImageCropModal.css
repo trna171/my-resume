@@ -1,0 +1,138 @@
+/* ============ 图片裁剪弹窗（关于我页偏好图片） ============ */
+.crop-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(6px);
+  animation: fade-in 200ms ease both;
+}
+
+.crop-modal__box {
+  width: min(680px, 100%);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 1.2rem 1.2rem 1rem;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  display: grid;
+  gap: 1rem;
+}
+
+.crop-modal__head h4 {
+  margin: 0 0 0.3rem;
+  font-size: 1.15rem;
+  font-weight: 750;
+}
+
+.crop-modal__head p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* 裁剪舞台：比例跟随原图（--crop-ratio 由 JS 传入），宽高都受限不超出视口，深色底 */
+.crop-modal__stage {
+  position: relative;
+  width: min(100%, calc(62vh * var(--crop-ratio, 1.3333)));
+  aspect-ratio: var(--crop-ratio, 4 / 3);
+  margin-inline: auto;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #1c1c1a;
+  touch-action: none;
+  cursor: grab;
+}
+
+.crop-modal__stage:active {
+  cursor: grabbing;
+}
+
+.crop-modal__stage img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.crop-modal__loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
+/* 三分法辅助线 */
+.crop-modal__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.crop-modal__grid-v,
+.crop-modal__grid-h {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.crop-modal__grid-v {
+  width: 1px;
+  height: 100%;
+}
+
+.crop-modal__grid-v.v1 { left: 33.333%; }
+.crop-modal__grid-v.v2 { left: 66.667%; }
+
+.crop-modal__grid-h {
+  width: 100%;
+  height: 1px;
+}
+
+.crop-modal__grid-h.h1 { top: 33.333%; }
+.crop-modal__grid-h.h2 { top: 66.667%; }
+
+/* 缩放控件 */
+.crop-modal__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.crop-modal__zoom-label {
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.crop-modal__zoom {
+  flex: 1 1 auto;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.crop-modal__zoom-value {
+  flex: 0 0 auto;
+  width: 3.2rem;
+  text-align: right;
+  font-size: 0.85rem;
+  font-weight: 650;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.crop-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crop-modal {
+    animation: none;
+  }
+}
